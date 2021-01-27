@@ -11,6 +11,7 @@
     "@apollo/client": "^3.3.7",
     "deepmerge": "^4.2.2",
     "graphql": "^15.5.0",
+    "graphql-tag": "^2.11.0",
     "iodash": "0.0.1-security",
     "next": "10.0.5",
     "next-redux-wrapper": "^6.0.2",

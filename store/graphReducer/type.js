@@ -1,0 +1,1 @@
+export const SET_SPACE_USERS = 'SET_SPACE_USERS'

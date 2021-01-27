@@ -5,12 +5,11 @@ import isEqual from 'lodash/isEqual'
 
 let apolloClient
 
-function createApolloClient() {
+export function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
     link: new HttpLink({
-      uri: 'https://nextjs-graphql-with-prisma-simple.vercel.app/api', // Server URL (must be absolute)
-      credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
+      uri: 'https://api.spacex.land/graphql/', // Server URL (must be absolute)
     }),
     cache: new InMemoryCache(),
   })
@@ -19,10 +18,7 @@ function createApolloClient() {
 export function initializeApollo(initialState = null) {
   const _apolloClient = apolloClient ?? createApolloClient()
 
-  // If your page has Next.js data fetching methods that use Apollo Client, the initial state
-  // get hydrated here
   if (initialState) {
-    // Get existing cache, loaded during client side data fetching
     const existingCache = _apolloClient.extract()
 
     // Merge the existing cache into data passed from getStaticProps/getServerSideProps

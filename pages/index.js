@@ -1,7 +1,6 @@
 import React from 'react';
 import Layout from '../components/Layout';
 import Link from 'next/link';
-import { useSelector } from 'react-redux'
 
 export default function Home() {
 
@@ -25,11 +24,11 @@ export default function Home() {
       <p>Click sample to see example!</p>
       {LinkData.map((item, index) => {
         return (
-          <div key={index} style={{margin: '5px', fontSize: '18px', fontWeight: 'bold', cursor: 'pointer'}}>
-            <Link href={item.path}>
-                {item.title}
+            <Link key={index} href={item.path}>
+              <div style={{margin: '5px', fontSize: '18px', fontWeight: 'bold', cursor: 'pointer'}}>
+                    {item.title}
+              </div>
             </Link>
-          </div>
         )
       })}
     </Layout> 
