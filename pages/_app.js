@@ -1,16 +1,16 @@
 import '../styles/globals.css'
 import { Provider } from 'react-redux'
-import { createWrapper } from 'next-redux-wrapper'
-import STORE from '../store'
+import { useStore } from '../store'
 import { ApolloProvider } from '@apollo/client'
 import { useApollo } from '../apollo'
 
 function MyApp({ Component, pageProps }) {
 
   const apolloClient = useApollo(pageProps.initialApolloState)
+  const store = useStore(pageProps.initialReduxState)
 
   return (
-      <Provider store={STORE}>
+      <Provider store={store}>
         <ApolloProvider client={apolloClient}>
           <Component {...pageProps} />
         </ApolloProvider>
@@ -18,6 +18,4 @@ function MyApp({ Component, pageProps }) {
   )
 }
 
-const reduxWrapper = createWrapper(() => STORE)
-
-export default reduxWrapper.withRedux(MyApp);
+export default MyApp

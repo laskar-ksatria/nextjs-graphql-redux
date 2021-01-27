@@ -3,7 +3,7 @@ import Layout from '../components/Layout';
 import Link from 'next/link'
 import { useSelector, useDispatch } from 'react-redux'
 //Define and Type;
-import { SET_POSTS, SET_POST_MESSAGE, SET_RESET } from '../store'
+import { initilizeStore, SET_POSTS, SET_POST_MESSAGE, SET_RESET } from '../store'
 
 function Posts({ postsProps }) {
 
@@ -48,6 +48,8 @@ export default Posts;
 export const getStaticProps = async (ctx) => {
     let data = await fetch("https://jsonplaceholder.typicode.com/posts")
     let posts = await data.json();
+    const { dispatch } = initilizeStore();
+    dispatch({type: SET_POSTS, payload: posts})
     return {
         props: {postsProps: posts}
     }

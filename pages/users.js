@@ -1,14 +1,14 @@
 import React from 'react';
 import Layout from '../components/Layout'
 //import type from store
-import { SET_USER_MESSAGE, SET_USERS } from '../store'
+import { SET_USER_MESSAGE, SET_USERS, initilizeStore } from '../store'
 import { useSelector, useDispatch } from 'react-redux'
 import Link from 'next/link'
 
 function Users({ usersProps }) {
 
     //Define state from reducer
-    const { userMessage } = useSelector(state => state.userReducer);
+    const { userMessage }  = useSelector(state => state.userReducer);
 
     //Define useDispatch
     const dispatch = useDispatch();
@@ -38,6 +38,9 @@ function Users({ usersProps }) {
             {usersProps.map((item, index) => {
                 return <p key={index}>{index + 1}. {item.name}</p>
             })}
+            <div>
+                
+            </div>
         </Layout>
     )
 
@@ -45,11 +48,13 @@ function Users({ usersProps }) {
 
 export default Users;
 
-export async function getServerSideProps(ctx) {
+export async function getStaticProps() {
+    const reduxStore = initilizeStore();
+    const { dispatch } = reduxStore
     let data = await fetch("https://jsonplaceholder.typicode.com/users")
     let users = await data.json();
-    return {
-        props: {usersProps: users}
-    }
+    dispatch({type: SET_USERS, payload: users})
+    return {props: {
+        usersProps: users
+    }}
 }
-
